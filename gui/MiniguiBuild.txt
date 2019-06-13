@@ -1,0 +1,48 @@
+minigui：github的版本是3.0.2  http://www.minigui.com/zhcn/download
+
+minigui chipmunk tslib 上传时被滤掉了，所以打了一个tar包，本地需要解压一下。
+
+编译说明：
+1、下载code
+2、修改顶层makefile的ALKAID_PROJECT_PATH:=/home/beal.wu/workspace/i2m/project，将路径改成自己的project path
+3、执行make clean;
+4、执行make
+
+
+如果出现minigui
+fbsstar.c: In function 'FB_SetVideoMode':
+fbsstar.c:918:5: error: implicit declaration of function 'MI_SYS_Init' [-Werror=implicit-function-declaration]
+     MI_SYS_Init();
+     ^~~~~~~~~~~
+fbsstar.c: In function 'FB_AllocHWSurface':
+fbsstar.c:1267:27: error: implicit declaration of function 'MI_SYS_MMA_Alloc' [-Werror=implicit-function-declaration]
+         if (MI_SUCCESS != MI_SYS_MMA_Alloc(NULL, size, &phyAddr))
+                           ^~~~~~~~~~~~~~~~
+fbsstar.c:1273:27: error: implicit declaration of function 'MI_SYS_Mmap' [-Werror=implicit-function-declaration]
+         if (MI_SUCCESS != MI_SYS_Mmap(phyAddr, size, &virt_addr, FALSE))
+                           ^~~~~~~~~~~
+fbsstar.c: In function 'FB_FreeHWSurface':
+fbsstar.c:1327:13: error: implicit declaration of function 'MI_SYS_Munmap' [-Werror=implicit-function-declaration]
+             MI_SYS_Munmap(bucket->virt_addr, bucket->size);
+             ^~~~~~~~~~~~~
+fbsstar.c:1328:13: error: implicit declaration of function 'MI_SYS_MMA_Free' [-Werror=implicit-function-declaration]
+             MI_SYS_MMA_Free(bucket->phy_addr);
+             ^~~~~~~~~~~~~~~
+
+那么执行一次make minigui_config，再make minigui_build
+
+
+目前make clean；make还有点问题
+建议依次编译：
+	freetype tslib zlib jpeg libpng Chipmunk2D minigui libmgplus libmgutils libmgeff libmgncs minigui-res
+如：
+	make freetype_config;make freetype_build
+	有出现 rmdir: failed to remove '/home/beal.wu/workspace/github/miniGUI_DisplayDemo/gui/library/include/freetype2/freetype/internal': No such file or directory
+	mkdir /home/beal.wu/workspace/github/miniGUI_DisplayDemo/gui/library/include/freetype2/freetype/internal
+	再make freetype_build
+	
+	
+	依次 make xxx_config;make xxx_build，如果有问题好解决，因为编译环境差异会导致某些编译异常。
+	
+
+另外，一般情况只需要参考minigui 对接GFX部分即可。

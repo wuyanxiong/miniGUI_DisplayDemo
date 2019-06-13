@@ -16,7 +16,7 @@ APP_MODULES_BUILD:=$(patsubst %,%_build,$(APP_MODULES))
 APP_MODULES_INSTALL:=$(patsubst %,%_install,$(APP_MODULES))
 APP_MODULES_CLEAN:=$(patsubst %,%_clean,$(APP_MODULES))
 
-ALKAID_PROJECT_PATH:=/home/yongliang.li/i2m/project
+ALKAID_PROJECT_PATH:=/home/beal.wu/workspace/i2m/project
 
 PWD=`pwd`
 EPREFIX=$(PWD)/library
@@ -25,7 +25,7 @@ PREFIX=$(PWD)/library
 include $(ALKAID_PROJECT_PATH)/configs/current.configs
 
 SDKLIBS=$(PROJ_ROOT)/release/$(PRODUCT)/$(CHIP)/$(BOARD)/$(TOOLCHAIN)/$(TOOLCHAIN_VERSION)/lib/dynamic
-SDKINCS=$(PROJ_ROOT)/release/$(PRODUCT)/include
+SDKINCS=$(PROJ_ROOT)/release/include
 UAPIINCS=$(PROJ_ROOT)/kbuild/$(KERNEL_VERSION)/include/uapi/mstar
 
 PLATFORM:=$(shell echo $(CHIP) | tr A-Z a-z )
